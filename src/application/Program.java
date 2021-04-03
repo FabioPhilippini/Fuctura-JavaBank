@@ -16,7 +16,6 @@ public class Program {
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-
 		int opcao = obterOpcao();
 
 		while (opcao != 8) {
@@ -58,7 +57,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Número da conta a ser removida: ");
 		int numConta = sc.nextInt();
-		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);		
+		Conta conta = Conta.contaNum(listaContas,numConta);	
 		if(conta != null && conta.getSaldo() ==0) {
 			listaContas.remove(conta);
 			System.out.println("Conta removida com sucesso.");
@@ -74,7 +73,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Inserir o número da conta: ");
 		int numConta = sc.nextInt();
-		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
+		Conta conta = Conta.contaNum(listaContas,numConta);
 		if (conta == null) {
 			System.err.println("Conta não encontrada");
 		} 
@@ -88,9 +87,8 @@ public class Program {
 	private static void listarContas() {
 		System.out.println("Lista de contas: ");
 		if (listaContas.isEmpty()) {
-			System.err.println("Nenhuma conta cadastrada");
+			System.err.println("Nenhuma conta cadastrada");	
 			System.out.println();
-			return;
 		} 
 		else {			
 			for (Conta c : listaContas) {
@@ -105,7 +103,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Digite o número da conta: ");
 		int numConta = sc.nextInt();
-		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
+		Conta conta = Conta.contaNum(listaContas,numConta);
 		if (conta == null) {
 			System.err.println("Conta não encontrada");
 		}
@@ -113,7 +111,7 @@ public class Program {
 		else {
 			System.out.print("Número da conta que vai receber a transferência: ");
 			int numContaTransferencia = sc.nextInt();
-			Conta outraConta = listaContas.stream().filter(x -> x.getNumero() == numContaTransferencia).findFirst().orElse(null);
+			Conta outraConta = Conta.contaNum(listaContas,numContaTransferencia);
 			if (outraConta != null) {
 				System.out.print("Valor a ser transferido: ");
 				double valorTransferencia = sc.nextDouble();
@@ -133,7 +131,7 @@ public class Program {
 
 		System.out.print("Digite o número da conta: ");
 		int numConta = sc.nextInt();
-		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
+		Conta conta = Conta.contaNum(listaContas,numConta);
 		if (conta == null) {
 			System.err.println("Conta não encontrada");
 		} 
@@ -151,7 +149,7 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Digite o número da conta: ");
 		int numConta = sc.nextInt();    
-		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
+		Conta conta = Conta.contaNum(listaContas,numConta);
 		if (conta == null) {
 			System.err.println("Conta não encontrada");
 		} 

@@ -1,7 +1,7 @@
 package entitie;
 
 public class ContaPoupanca extends Conta {
-private double juros;
+    private double juros;
 	
 	public ContaPoupanca() {
 		super();

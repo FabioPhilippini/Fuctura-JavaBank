@@ -32,11 +32,7 @@ public abstract class Conta {
 	public int getNumero() {
 		return numero;
 	}
-    /*
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-    */
+    
 	public double getLimite() {
 		return limite;
 	}
@@ -56,11 +52,7 @@ public abstract class Conta {
 	public double getSaldo() {
 		return saldo;
 	}
-    /*
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-    */
+    
 	public boolean getContaAtiva() {
 		return contaAtiva;
 	}
@@ -111,6 +103,11 @@ public abstract class Conta {
 	public static boolean contaExiste(List<Conta> listaContas,int numConta) {
 		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
 		return conta != null;
+	}
+	
+	public static Conta contaNum(List<Conta> listaContas,int numConta) {
+		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
+		return conta;
 	}
 	
 	public String toString() {
