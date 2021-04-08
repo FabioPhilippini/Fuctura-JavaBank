@@ -2,13 +2,14 @@ package entitie;
 
 import java.util.List;
 
+import exceptions.DomainException;
+
 public abstract class Conta {
 	private Pessoa pessoa;
 	private int numero;
 	private double limite;
 	private String agencia;
 	protected double saldo;
-	private boolean contaAtiva = false;
 
 	public Conta() {
 	}
@@ -53,36 +54,29 @@ public abstract class Conta {
 		return saldo;
 	}
     
-	public boolean getContaAtiva() {
-		return contaAtiva;
-	}
-
-	public void setContaAtiva(boolean contaAtiva) {
-		this.contaAtiva = contaAtiva;
-	}
-
 	public void depositar(double quantia) {
-		if (quantia > 0) {
-			this.saldo += quantia;
-		} 
-		else {
-			System.err.println("Impossivel depositar");
+		validarDeposito(quantia);
+		this.saldo += quantia;
+	}
+
+	public void validarDeposito(double quantia) {
+		if(quantia <= 0) {
+			throw new DomainException("Valor inválido.");
 		}
 	}
 
-	public boolean sacar(double quantia) {
-		if (this.saldo >= quantia && quantia > 0) {
-			this.saldo -= quantia;
-			System.out.println("Saque efetuado.");
-			return true;
-		} 
-		else if (quantia <= 0) {
-			System.err.println("Valor inválido.");
-			return false;
-		} 
-		else {
-			System.err.println("Saldo Insuficiente.");
-			return false;
+	public void sacar(double quantia) {
+		validarSaque(quantia);
+		this.saldo -= quantia;
+		System.out.println("Saque efetuado.");		
+	} 
+	
+	public void validarSaque(double quantia) {
+		if(quantia <= 0) {
+			throw new DomainException("Valor inválido.");
+		}
+		if(quantia > this.saldo) {
+			throw new DomainException("Saldo Insuficiente.");
 		}
 	}
     
@@ -100,20 +94,18 @@ public abstract class Conta {
 		outraConta.depositar(quantia);
 	}
 	
-	public static boolean contaExiste(List<Conta> listaContas,int numConta) {
-		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
-		return conta != null;
-	}
-	
 	public static Conta contaNum(List<Conta> listaContas,int numConta) {
 		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
 		return conta;
 	}
 	
-	public String toString() {
-		return "[ Titular: " + pessoa + " - Conta: " + numero + " - Agencia: " + agencia + " - Limite: " + limite
-				+ " - Saldo: " + saldo;
+	public void dadosCliente() {
+		System.out.println(pessoa);
 	}
 	
-    
+	public String toString() {
+		return "[ Titular: " + pessoa.getNome() + " - Conta: " + numero + " - Agencia: " + agencia + " - Limite: " + limite
+				+ " - Saldo: " + saldo;
+	}
+	  
 }

@@ -22,12 +22,8 @@ public class ContaPoupanca extends Conta {
 	
 	@Override
 	public void depositar(double quantia) {		
-		if (quantia > 0) {
-			this.saldo += quantia - (quantia*juros/100);		
-		} 
-		else {
-			System.err.println("Impossivel depositar");
-		}
+		super.validarDeposito(quantia);
+	    this.saldo += quantia - (quantia*juros/100);
 	} 
 	
 	@Override

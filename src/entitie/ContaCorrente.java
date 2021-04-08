@@ -21,12 +21,10 @@ public class ContaCorrente extends Conta {
 	}
 
 	@Override
-	public boolean sacar(double quantia) {
-		if (quantia > 0) {
-			quantia += desconto;
-		}
+	public void sacar(double quantia) {
+		super.validarSaque(quantia);
+		quantia += desconto;
 		super.sacar(quantia);
-		return true;
 	}
 
 	@Override
@@ -37,7 +35,6 @@ public class ContaCorrente extends Conta {
 
 	@Override
 	public String toString() {
-		return super.toString() + " - Desconto: " + String.format("%.2f", desconto) + " - " + "Tipo: Conta Corrente"
-				+ " ]";
+		return super.toString() + " - Desconto: " + String.format("%.2f", desconto) + " - " + "Tipo: Conta Corrente" + " ]";
 	}
 }
