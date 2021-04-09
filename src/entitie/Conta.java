@@ -14,7 +14,7 @@ public abstract class Conta {
 	public Conta() {
 	}
 
-	public Conta(Pessoa pessoa, int numero, double limite, String agencia, double saldo) {	
+	public Conta(Pessoa pessoa, int numero, double limite, String agencia, double saldo) {
 		this.pessoa = pessoa;
 		this.numero = numero;
 		this.limite = limite;
@@ -33,7 +33,7 @@ public abstract class Conta {
 	public int getNumero() {
 		return numero;
 	}
-    
+
 	public double getLimite() {
 		return limite;
 	}
@@ -53,14 +53,14 @@ public abstract class Conta {
 	public double getSaldo() {
 		return saldo;
 	}
-    
+
 	public void depositar(double quantia) {
 		validarDeposito(quantia);
 		this.saldo += quantia;
 	}
 
 	public void validarDeposito(double quantia) {
-		if(quantia <= 0) {
+		if (quantia <= 0) {
 			throw new DomainException("Valor inválido.");
 		}
 	}
@@ -68,18 +68,18 @@ public abstract class Conta {
 	public void sacar(double quantia) {
 		validarSaque(quantia);
 		this.saldo -= quantia;
-		System.out.println("Saque efetuado.");		
-	} 
-	
+		System.out.println("Saque efetuado.");
+	}
+
 	public void validarSaque(double quantia) {
-		if(quantia <= 0) {
+		if (quantia <= 0) {
 			throw new DomainException("Valor inválido.");
 		}
-		if(quantia > this.saldo) {
+		if (quantia > this.saldo) {
 			throw new DomainException("Saldo Insuficiente.");
 		}
 	}
-    
+
 	public void exibirDados() {
 		System.out.println("Número da Conta: " + this.getNumero());
 		System.out.println("Número da Agência: " + this.getAgencia());
@@ -93,19 +93,19 @@ public abstract class Conta {
 		sacar(quantia);
 		outraConta.depositar(quantia);
 	}
-	
-	public static Conta contaNum(List<Conta> listaContas,int numConta) {
+    
+	//Método para buscar se uma conta existe pelo número dela usando uma expressão lambda
+	public static Conta contaNum(List<Conta> listaContas, int numConta) {
 		Conta conta = listaContas.stream().filter(x -> x.getNumero() == numConta).findFirst().orElse(null);
 		return conta;
 	}
-	
+
 	public void dadosCliente() {
 		System.out.println(pessoa);
 	}
-	
+
 	public String toString() {
-		return "[ Titular: " + pessoa.getNome() + " - Conta: " + numero + " - Agencia: " + agencia + " - Limite: " + limite
-				+ " - Saldo: " + saldo;
+		return "[ Titular: " + pessoa.getNome() + " - Conta: " + numero + " - Agencia: " + agencia + " - Limite: "
+				+ limite + " - Saldo: " + saldo;
 	}
-	  
 }

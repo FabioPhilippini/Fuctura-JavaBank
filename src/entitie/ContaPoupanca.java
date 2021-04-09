@@ -1,8 +1,8 @@
 package entitie;
 
 public class ContaPoupanca extends Conta {
-    private double juros;
-	
+	private double juros;
+
 	public ContaPoupanca() {
 		super();
 	}
@@ -19,19 +19,19 @@ public class ContaPoupanca extends Conta {
 	public void setJuros(double juros) {
 		this.juros = juros;
 	}
-	
+
 	@Override
-	public void depositar(double quantia) {		
+	public void depositar(double quantia) {
 		super.validarDeposito(quantia);
-	    this.saldo += quantia - (quantia*juros/100);
-	} 
-	
+		this.saldo += quantia - (quantia * juros / 100);
+	}
+
 	@Override
 	public void exibirDados() {
 		super.exibirDados();
 		System.out.println("Tipo: Conta Poupança");
 	}
-	
+
 	@Override
 	public String toString() {
 		return super.toString() + ", Juros: " + String.format("%.2f", juros) + " % - " + "Tipo: Conta Poupança" + " ]";

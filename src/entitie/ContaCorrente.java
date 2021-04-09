@@ -35,6 +35,7 @@ public class ContaCorrente extends Conta {
 
 	@Override
 	public String toString() {
-		return super.toString() + " - Desconto: " + String.format("%.2f", desconto) + " - " + "Tipo: Conta Corrente" + " ]";
+		return super.toString() + " - Desconto: " + String.format("%.2f", desconto) + " - " + "Tipo: Conta Corrente"
+				+ " ]";
 	}
 }
